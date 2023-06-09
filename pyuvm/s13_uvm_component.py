@@ -7,6 +7,7 @@ import logging
 import fnmatch
 import string
 from cocotb.log import SimColourLogFormatter, SimTimeContextFilter
+from cocotb.triggers import Timer
 
 
 # 13.1.1
@@ -417,6 +418,7 @@ class uvm_root(uvm_component, metaclass=utility_classes.UVM_ROOT_Singleton):
             self.running_phase.traverse(self.uvm_test_top)
             if self.running_phase == uvm_run_phase:
                 await utility_classes.ObjectionHandler().run_phase_complete()  # noqa: E501
+        await Timer(100, "ns")
 
 
 # In the SystemVerilog UVM the uvm_config_db is a
